@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
 chroma_db/
+chroma_local/
 .env
 .claude/settings.local.json
