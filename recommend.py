@@ -42,6 +42,9 @@ from pathlib import Path
 
 import numpy as np
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()  # read keys from a local .env file if present
 
 SOURCES = {  # pool name -> enriched JSON
     "popular": "movies_metadata.json",
