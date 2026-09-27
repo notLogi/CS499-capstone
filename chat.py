@@ -22,15 +22,17 @@ through Requesty):
 import argparse
 import os
 import sys
+from pathlib import Path
 
 import chromadb
 import requests
 
-from recommend import embed  # same embedding config used to build chroma_db
+from recommend import embed  # same embedding config used to build chroma_db (also loads config/.env)
 
+ROOT = Path(__file__).resolve().parent
 ROUTER_URL = "https://router.requesty.ai/v1/chat/completions"
 CHAT_MODEL = os.environ.get("REQUESTY_CHAT_MODEL", "google/gemma-4-31b-it")
-DB_DIR = "chroma_db"
+DB_DIR = str(ROOT / "chroma_db")
 COLLECTION = "films"
 
 SYSTEM_PROMPT = """You are a film recommendation assistant. You are given a user's \

@@ -23,8 +23,9 @@ from pathlib import Path
 
 import chromadb
 
-JSONL_FILE = "movies_rag.jsonl"
-DB_DIR = "chroma_local"          # separate from the OpenAI-vector chroma_db/
+ROOT = Path(__file__).resolve().parent
+JSONL_FILE = str(ROOT / "metadata" / "movies_rag.jsonl")
+DB_DIR = str(ROOT / "chroma_local")   # separate from the OpenAI-vector chroma_db/
 COLLECTION = "films_local"
 BATCH_SIZE = 500
 

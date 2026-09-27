@@ -19,8 +19,9 @@ from pathlib import Path
 
 import chromadb
 
-JSONL_FILE = "movies_rag.jsonl"
-DB_DIR = "chroma_db"
+ROOT = Path(__file__).resolve().parent
+JSONL_FILE = str(ROOT / "metadata" / "movies_rag.jsonl")
+DB_DIR = str(ROOT / "chroma_db")
 COLLECTION = "films"
 BATCH_SIZE = 500  # chroma's add() has an internal max batch size; stay well under it
 

@@ -44,14 +44,15 @@ import numpy as np
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()  # read keys from a local .env file if present
+ROOT = Path(__file__).resolve().parent
+load_dotenv(ROOT / "config" / ".env")  # read keys from config/.env if present
 
 SOURCES = {  # pool name -> enriched JSON
-    "popular": "movies_metadata.json",
-    "underrated": "movies_underrated.json",
+    "popular": str(ROOT / "metadata" / "movies_metadata.json"),
+    "underrated": str(ROOT / "metadata" / "movies_underrated.json"),
 }
-INDEX_FILE = "film_index.npz"
-META_FILE = "film_index_meta.json"
+INDEX_FILE = str(ROOT / "metadata" / "film_index.npz")
+META_FILE = str(ROOT / "metadata" / "film_index_meta.json")
 
 BASE_URL = os.environ.get("EMBED_BASE_URL", "https://api.openai.com/v1").rstrip("/")
 MODEL = os.environ.get("EMBED_MODEL", "text-embedding-3-small")
@@ -265,7 +266,7 @@ def main() -> None:
         help='"build" to (re)build the mood-recommender index, "export-rag" to '
         "write flat JSONL embeddings, otherwise a free-text query",
     )
-    p.add_argument("--out", default="movies_rag.jsonl", help="export-rag: output JSONL path")
+    p.add_argument("--out", default=str(ROOT / "metadata" / "movies_rag.jsonl"), help="export-rag: output JSONL path")
     p.add_argument("--limit", type=int, default=None, help="export-rag: only embed the first N films (cheap test)")
     p.add_argument("--alpha", type=float, default=DEFAULT_ALPHA,
                    help="mood weight 0-1 (default %(default)s); 1 = feeling only, 0 = plot only")

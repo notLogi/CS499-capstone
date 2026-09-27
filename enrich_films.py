@@ -44,7 +44,7 @@ from pathlib import Path
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()  # read keys from a local .env file if present
+load_dotenv(Path(__file__).resolve().parent / "config" / ".env")  # read keys from config/.env
 
 MIN_OVERVIEW_WORDS = 8
 ROUTER_URL = "https://router.requesty.ai/v1/chat/completions"
